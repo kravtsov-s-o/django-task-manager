@@ -8,6 +8,12 @@ User = get_user_model()
 
 
 class TaskSerializer(serializers.ModelSerializer):
+    """
+    Serializer for tasks within a project.
+
+    Handles assignee validation, restricts assignment
+    to project members, and enforces role-based updates.
+    """
     status = serializers.ChoiceField(
         choices=Task.Status.choices,
         write_only=True,

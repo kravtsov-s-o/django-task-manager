@@ -7,7 +7,15 @@ from task_manager.api.serializers.project_member import ProjectMemberSerializer
 
 from task_manager.models import Project, ProjectMember, Task
 
+
 class ProjectMemberViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint for managing members of a project.
+
+    Allows project owners and managers to add, update,
+    and remove project members according to their roles.
+    """
+
     serializer_class = ProjectMemberSerializer
     permission_classes = [IsAuthenticated, ProjectMemberPermission]
 

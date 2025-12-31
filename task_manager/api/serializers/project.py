@@ -4,6 +4,13 @@ from task_manager.models import Project
 
 
 class ProjectSerializer(serializers.ModelSerializer):
+    """
+    Serializer for project entities.
+
+    Used to create, retrieve and update project data.
+    Exposes owner information in a read-only format.
+    """
+
     class Meta:
         model = Project
         fields = (

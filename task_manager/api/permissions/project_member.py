@@ -7,6 +7,14 @@ from task_manager.models import ProjectMember
 
 
 class ProjectMemberPermission(ProjectMemberMixin, BasePermission):
+    """
+    Permission rules for managing project members.
+
+    Owner can manage all members except themselves.
+    Manager can manage members only.
+    Members have read-only access.
+    """
+
     def has_permission(self, request, view):
         if self.is_safe_method(request):
             return True

@@ -8,6 +8,13 @@ User = get_user_model()
 
 
 class ProjectMemberSerializer(serializers.ModelSerializer):
+    """
+    Serializer for managing project membership.
+
+    Handles user assignment to projects, role validation,
+    and prevents duplicate memberships.
+    """
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

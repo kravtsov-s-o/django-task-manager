@@ -5,6 +5,13 @@ from task_manager.models import ProjectMember
 
 
 class TaskPermission(ProjectMemberMixin, BasePermission):
+    """
+    Permission rules for task operations within a project.
+
+    Owner and Manager can fully manage tasks.
+    Member can update task status only for tasks assigned to them.
+    """
+
     def has_object_permission(self, request, view, obj):
         if self.is_safe_method(request):
             return True

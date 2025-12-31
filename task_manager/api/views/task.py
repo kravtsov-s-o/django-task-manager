@@ -9,7 +9,15 @@ from task_manager.api.serializers.task import TaskSerializer, TaskStatusSerializ
 
 from task_manager.models import Project, Task
 
+
 class TaskViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint for managing tasks within a project.
+
+    Tasks are scoped to a single project and accessible
+    only to users who are members of that project.
+    """
+
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated, TaskPermission]
 

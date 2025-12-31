@@ -4,9 +4,13 @@ from task_manager.models import ProjectMember
 
 User = get_user_model()
 
+
 class ProjectContextMixin:
     """
-    Provides access to project_pk from serializer context.
+    Provides access to project identifier from serializer context.
+
+    Intended for serializers that operate within a project scope
+    and require project-specific validation or queryset restriction.
     """
 
     @property
@@ -16,7 +20,9 @@ class ProjectContextMixin:
 
 class AssigneeQuerysetMixin(ProjectContextMixin):
     """
-    Restricts assignee queryset to project members (excluding OWNER).
+    Restricts assignee queryset to users who are members of the project.
+
+    Project owners are excluded from assignment.
     """
 
     def restrict_assignee_queryset(self):

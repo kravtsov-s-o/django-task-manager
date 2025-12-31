@@ -7,7 +7,14 @@ from task_manager.api.serializers.project import ProjectSerializer
 
 from task_manager.models import Project, ProjectMember, Task
 
+
 class ProjectViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint for managing user projects.
+
+    Allows authenticated users to create projects and
+    access only projects they are members of.
+    """
     serializer_class = ProjectSerializer
     permission_classes = [IsAuthenticated, ProjectPermission]
 

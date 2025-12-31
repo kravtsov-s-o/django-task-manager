@@ -5,7 +5,10 @@ from task_manager.api.permissions.utils import get_project_membership
 
 class ProjectMemberMixin:
     """
-    Provides helper to check project membership.
+    Shared helper methods for project-based permission checks.
+
+    Provides utilities to determine whether the current user
+    is a member of a given project and to identify safe requests.
     """
 
     def get_membership(self, request, project):
