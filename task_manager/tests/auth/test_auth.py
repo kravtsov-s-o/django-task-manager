@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.test import APITestCase
 
+from task_manager.tests.helpers.auth import create_user
+
 User = get_user_model()
 
 
@@ -22,10 +24,7 @@ class AuthTestCase(APITestCase):
         self.assertTrue(User.objects.filter(username=self.username).exists())
 
     def test_login_returns_tokens(self):
-        User.objects.create_user(
-            username=self.username,
-            password=self.password,
-        )
+        create_user(username=self.username, password=self.password)
 
         url = "/api/auth/login/"
         data = {
@@ -44,10 +43,7 @@ class AuthTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_access_with_valid_token(self):
-        User.objects.create_user(
-            username=self.username,
-            password=self.password,
-        )
+        create_user(username=self.username, password=self.password)
 
         login_response = self.client.post(
             "/api/auth/login/",
