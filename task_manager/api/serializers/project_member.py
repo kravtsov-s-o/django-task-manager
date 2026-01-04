@@ -54,8 +54,23 @@ class ProjectMemberSerializer(serializers.ModelSerializer):
         return value
 
     def validate(self, attrs):
+        request = self.context.get('request')
         project_pk = self.context.get("project_pk")
         user = attrs.get("user")
+        role = attrs.get("role")
+
+        membership = ProjectMember.objects.get(
+            project_id=project_pk,
+            user=request.user,
+        )
+
+        if (
+                membership.role == ProjectMember.Roles.MANAGER
+                and role != ProjectMember.Roles.MEMBER
+        ):
+            raise serializers.ValidationError(
+                "Manager can assign only MEMBER role."
+            )
 
         if ProjectMember.objects.filter(
                 project_id=project_pk,
