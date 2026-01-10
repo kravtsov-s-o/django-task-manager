@@ -11,7 +11,7 @@ def get_project_membership(*, user, project):
     try:
         return ProjectMember.objects.get(
             user=user,
-            project=project,
+            project_id=project,
         )
     except ProjectMember.DoesNotExist:
         return None
