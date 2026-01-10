@@ -5,6 +5,7 @@ from task_manager.models import ProjectMember
 from task_manager.tests.factories.project import create_project
 from task_manager.tests.helpers.api import auth_client
 from task_manager.tests.helpers.auth import create_user
+from task_manager.tests.helpers.project_membership import add_user_to_project
 
 
 class ProjectMemberAPITests(APITestCase):
@@ -39,10 +40,7 @@ class ProjectMemberAPITests(APITestCase):
 
         project = create_project(owner=owner)
 
-        ProjectMember.objects.create(
-            project=project,
-            user=manager,
-            role=ProjectMember.Roles.MANAGER)
+        add_user_to_project(project, manager, ProjectMember.Roles.MANAGER)
 
         client = auth_client(manager)
         response = client.post(
@@ -62,10 +60,7 @@ class ProjectMemberAPITests(APITestCase):
 
         project = create_project(owner=owner)
 
-        ProjectMember.objects.create(
-            project=project,
-            user=manager,
-            role=ProjectMember.Roles.MANAGER)
+        add_user_to_project(project, manager, ProjectMember.Roles.MANAGER)
 
         client = auth_client(manager)
         response = client.post(
@@ -85,11 +80,7 @@ class ProjectMemberAPITests(APITestCase):
 
         project = create_project(owner=owner)
 
-        ProjectMember.objects.create(
-            project=project,
-            user=member,
-            role=ProjectMember.Roles.MEMBER
-        )
+        add_user_to_project(project, member, ProjectMember.Roles.MEMBER)
 
         client = auth_client(member)
         response = client.post(
@@ -108,11 +99,7 @@ class ProjectMemberAPITests(APITestCase):
 
         project = create_project(owner=owner)
 
-        ProjectMember.objects.create(
-            project=project,
-            user=member,
-            role=ProjectMember.Roles.MEMBER
-        )
+        add_user_to_project(project, member, ProjectMember.Roles.MEMBER)
 
         client = auth_client(member)
         response = client.post(
