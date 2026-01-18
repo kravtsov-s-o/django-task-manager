@@ -26,18 +26,16 @@ class TaskPermission(ProjectMemberMixin, BasePermission):
             project=project_pk,
         ).first()
 
-        if membership is None:
+        if not membership:
             return True
 
-        if membership.role == ProjectMember.Roles.MEMBER:
-            return False
+        if membership.role == ProjectMember.Roles.MEMBER and request.method == "PATCH":
+            return True
 
         return membership.role in (
             ProjectMember.Roles.OWNER,
             ProjectMember.Roles.MANAGER,
         )
-
-
 
         return True
 
