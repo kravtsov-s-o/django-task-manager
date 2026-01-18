@@ -1,5 +1,5 @@
 from rest_framework import status
-from rest_framework.test import APITestCase, APIClient
+from rest_framework.test import APITestCase
 
 from task_manager.models import ProjectMember, Task
 from task_manager.tests.factories.project import create_project
