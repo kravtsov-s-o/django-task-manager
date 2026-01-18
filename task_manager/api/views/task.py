@@ -46,7 +46,7 @@ class TaskViewSet(viewsets.ModelViewSet):
 
     @action(
         detail=True,
-        methods=["post"],
+        methods=["patch"],
         url_path="change-status",
     )
     def change_status(self, request, project_pk=None, pk=None):
